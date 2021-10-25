@@ -1,3 +1,4 @@
+---
 version: '3.2'
 
 volumes:
@@ -24,5 +25,5 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.traefik.entrypoints=websecure
-      - traefik.http.routers.traefik.rule=Host(`traefik1.wolverine.cefim-formation.org`)
+      - traefik.http.routers.traefik.rule=Host(`DNS`)
       - traefik.http.routers.traefik.service=api@internal
