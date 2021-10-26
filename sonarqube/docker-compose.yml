@@ -5,8 +5,8 @@ services:
   db:
     image: postgres:12.1
     environment:
-      - POSTGRES_USER=sonar
-      - POSTGRES_PASSWORD=mypass
+      - POSTGRES_USER=sonar # change me
+      - POSTGRES_PASSWORD=mypass# change me
       - POSTGRES_DB=sonarqube
     networks:
       - traefik_proxy
@@ -16,8 +16,8 @@ services:
   sonarqube:
     image: sonarqube:7.7-community
     environment:
-      - sonar.jdbc.username=sonar
-      - sonar.jdbc.password=mypass
+      - sonar.jdbc.username=sonar # change me
+      - sonar.jdbc.password=mypass # change me
       - sonar.jdbc.url=jdbc:postgresql://db:5432/sonarqube
     networks:
       - traefik_proxy
@@ -29,7 +29,7 @@ services:
       - sonarqube_bundled-plugins:/opt/sonarqube/bundled-plugins
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.sonarqube.rule=Host(`sonarqube.wolverine.cefim-formation.org`)"
+      - "traefik.http.routers.sonarqube.rule=Host(`DNS`)" # DNS change me
       - "traefik.http.routers.sonarqube.entrypoints=websecure"
 
 volumes:
