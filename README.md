@@ -1,4 +1,4 @@
-#Wolverine Project
+# Wolverine Project
 - This Project containes three docker compose that allows to create four images as follows:
 1. Traefik allows our services to pass through a proxy and loadbalance them and expose them to the external with a tls resolver and secure them
 2. SonarQube is our code scanner for any vulnarability and so on
