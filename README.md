@@ -6,10 +6,10 @@
 4. Harbor is our registery for our docker images
 ## How to set up this project
 1. First you need to clone the project on your local machine
----
+```
 git clone https://logan.cefim-formation.org/root/tp_wolverine.git
----
-2. Have walkthorugh the folders with e.g
+```
+2. Have walkthorugh the folders for e.g
 ```
 cd /tp_wolverine
 ls 
