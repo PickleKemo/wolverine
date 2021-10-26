@@ -258,7 +258,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.harbor-web.entrypoints=websecure
-      - traefik.http.routers.harbor-web.rule=Host(`harbor.wolverine.cefim-formation.org`)
+      - traefik.http.routers.harbor-web.rule=Host(`DNS`) # change me
       - traefik.http.middlewares.harbor-behind-proxy.headers.customrequestheaders.X-Forwarded-Proto=https
       #- traefik.http.routers.harbor.service=harbor
       - traefik.http.routers.harbor-web.middlewares=harbor-behind-proxy
