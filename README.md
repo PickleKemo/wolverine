@@ -1,6 +1,6 @@
 # Wolverine Project
 - This Project containes three docker compose that allows to create four images as follows:
-1. Traefik allows our services to pass through a proxy and loadbalance them and expose them to the external with a tls resolver and secure them
+1. Traefik allows our services to pass through a Reverse proxy and loadbalance them and expose them to the external with a tls resolver and secure them
 2. SonarQube is our code scanner for any vulnarability and so on
 3. PostgreSQL to store data of SonarQube
 4. Harbor is our registery for our docker images
@@ -25,8 +25,8 @@ ls
 docker-compose.yml
 ```
 ### Mont our containers
-- We will start with Traefik since it is our proxy
-#### First let's understand our config and our docker-compose of Traefik
+- We will start with Traefik since it is our Reverse proxy
+#### First let's understand our config and our docker-compose of Traefik Reverse proxy
 ***traefik.yml***
 ```
 api:
