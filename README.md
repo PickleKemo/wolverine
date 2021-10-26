@@ -26,7 +26,7 @@ docker-compose.yml
 ```
 ### Mont our containers
 - We will start with Traefik since it is our proxy
-#### First let's understand our config and our docker-compose
+#### First let's understand our config and our docker-compose of Traefik
 ***traefik.yml***
 ```
 api:
@@ -119,4 +119,53 @@ mv traefik.yml /etc/traefik/
 2. We go back to our traefik file where our docker compose is 
 ```
 docker-compose up -d
+```
+#### Second we do SonarQube
+***docker-compose.yml***
+```
+---
+version: "3.2"
+
+services:
+  db:
+    image: postgres:12.1 # pull DB image
+    environment:
+      - POSTGRES_USER=sonar # change me
+      - POSTGRES_PASSWORD=mypass # change me
+      - POSTGRES_DB=sonarqube
+    networks:
+      - traefik_proxy  # we use our existing proxy that we setted up previously
+    volumes:
+      - sonarqube_db:/var/lib/postgresql/data 
+
+  sonarqube:
+    image: sonarqube:7.7-community # pull SonarQube image
+    environment:
+      - sonar.jdbc.username=sonar # change me
+      - sonar.jdbc.password=mypass # change me
+      - sonar.jdbc.url=jdbc:postgresql://db:5432/sonarqube
+    networks:
+      - traefik_proxy # we use our existing proxy that we setted up previously
+    volumes: 
+      - sonarqube_conf:/opt/sonarqube/conf  # configuration
+      - sonarqube_extensions:/opt/sonarqube/extensions # extensions
+      - sonarqube_logs:/opt/sonarqube/logs # logs
+      - sonarqube_data:/opt/sonarqube/data # data
+      - sonarqube_bundled-plugins:/opt/sonarqube/bundled-plugins # bundled plugins
+    labels:
+      - "traefik.enable=true" # enable it to be accessed via the internal
+      - "traefik.http.routers.sonarqube.rule=Host(`DNS`)" # change me
+      - "traefik.http.routers.sonarqube.entrypoints=websecure" # we secure it
+
+volumes: # define volumes
+  postgresql_data:
+  sonarqube_bundled-plugins:
+  sonarqube_conf:
+  sonarqube_data:
+  sonarqube_db:
+  sonarqube_extensions:
+  sonarqube_logs:
+networks: # define network
+  traefik_proxy:
+    name: traefik_proxy
 ```
